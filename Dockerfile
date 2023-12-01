@@ -17,6 +17,9 @@ COPY requirements.txt .
 # install python dependencies
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
+RUN flask db init
+RUN flask db migrate
+RUN flask db upgrade
 
 # COPY env.sample .env
 
