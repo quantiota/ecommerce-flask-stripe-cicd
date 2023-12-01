@@ -30,6 +30,7 @@ from app import mail
 from app.config import Config
 
 from flask_mail import Message
+from .models import User, ContactUsMessages
 default_sender = Config.MAIL_DEFAULT_SENDER
 
 # Stripe Credentials
@@ -452,6 +453,13 @@ def contact():
 
         if status:
             msg = 'Message sent.'
+            save_user_info = ContactUsMessages(
+                name=contact_name,
+                email=contact_email,
+                message=contact_msg
+            )
+            db.session.add(save_user_info)
+            db.session.commit()
         else:
             msg = 'Error: ' + error 
 

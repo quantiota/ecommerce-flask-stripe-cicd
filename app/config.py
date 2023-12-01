@@ -14,6 +14,13 @@ class Config(object):
     # App Config - the minimal footprint
     SECRET_KEY = os.getenv('SECRET_KEY', 'S#perS3crEt_9999')
 
+    # This will create a file in <app> FOLDER
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'db.sqlite3')
+    SQLALCHEMY_TRACK_MODIFICATIONS = False 
+
+    # Assets Management
+    ASSETS_ROOT = os.getenv('ASSETS_ROOT', '/static/assets') 
+
     # Mail Settings
     MAIL_SERVER   = os.getenv('MAIL_SERVER', 'server195.web-hosting.com')
     MAIL_PORT     = os.getenv('MAIL_PORT', '465')

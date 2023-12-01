@@ -30,3 +30,11 @@ class User(UserMixin, db.Model):
         return self.username
     
 
+class ContactUsMessages(db.Model):
+
+    __tablename__ = 'contact_us_messages'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(300))
+    email = db.Column(db.String(100))
+    message = db.Column(db.Text())
