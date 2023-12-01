@@ -14,7 +14,18 @@ class Config(object):
     # App Config - the minimal footprint
     SECRET_KEY = os.getenv('SECRET_KEY', 'S#perS3crEt_9999')
 
-    MAIL_DEFAULT_SENDER      = os.getenv('MAIL_DEFAULT_SENDER'     , None )
+    # Mail Settings
+    MAIL_SERVER   = os.getenv('MAIL_SERVER', 'server195.web-hosting.com')
+    MAIL_PORT     = os.getenv('MAIL_PORT', '465')
+
+    # Mail Authentication
+    MAIL_USERNAME = os.getenv('MAIL_USERNAME', 'amazonkdp@binomatrix.com')
+    MAIL_PASSWORD = os.getenv('MAIL_PASSWORD', 'oi5c]Y~&Z{3NlGXPCG')
+    MAIL_USE_SSL = True
+
+    # Mail Accounts
+    MAIL_DEFAULT_SENDER = os.getenv('MAIL_DEFAULT_SENDER', 'amazonkdp@binomatrix.com')
+
     STRIPE_SECRET_KEY      = os.getenv('STRIPE_SECRET_KEY'     , None )
     STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY', None )
     SERVER_ADDRESS         = os.getenv('SERVER_ADDRESS', 'http://localhost:5000/')
