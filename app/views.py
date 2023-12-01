@@ -438,7 +438,6 @@ def send_email(to, subject, message):
         return False, str( e )
 
 @app.route('/contact/', methods=['GET', 'POST'])
-@login_required
 def contact():
 
     msg = None
