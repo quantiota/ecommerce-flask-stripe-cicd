@@ -9,8 +9,10 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy 
 from flask_login import LoginManager 
+from flask_mail import Mail
 
 db = SQLAlchemy()
+mail = Mail()
 
 from .config import Config
 
@@ -25,7 +27,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.session_protection = "strong"
 db.init_app(app)
-
+mail.init_app(app)
 from .models import User
 
 @login_manager.user_loader
