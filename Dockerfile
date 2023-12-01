@@ -4,6 +4,9 @@ FROM python:3.9
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
+# set flask app
+ENV FLASK_APP run.py
+
 # Used by Stripe for callback URL 
 # for successful payment and cancelled
 # ENV SERVER_ADDRESS  ${SERVER_ADDRESS}
