@@ -14,6 +14,7 @@ class Config(object):
     # App Config - the minimal footprint
     SECRET_KEY = os.getenv('SECRET_KEY', 'S#perS3crEt_9999')
 
+    MAIL_DEFAULT_SENDER      = os.getenv('MAIL_DEFAULT_SENDER'     , None )
     STRIPE_SECRET_KEY      = os.getenv('STRIPE_SECRET_KEY'     , None )
     STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY', None )
     SERVER_ADDRESS         = os.getenv('SERVER_ADDRESS', 'http://localhost:5000/')

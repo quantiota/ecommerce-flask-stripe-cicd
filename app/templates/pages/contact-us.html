@@ -1,16 +1,15 @@
 {% extends 'layouts/base.html' %}
-
-{% block title %} Raspberry Pi Devbox {% endblock title %}
-
+{% block title %}
+  Raspberry Pi Devbox
+{% endblock title %}
 <!-- Specific CSS goes HERE -->
-{% block stylesheets %}{% endblock stylesheets %}
-
-{% block body_class %} Contact Us bg-gray-100 {% endblock body_class %}
-
+{% block stylesheets %}
+{% endblock stylesheets %}
+{% block body_class %}
+  Contact Us bg-gray-100
+{% endblock body_class %}
 {% block content %}
-
   {% include "includes/navigation-light.html" %}
-
   <section class="pt-3 pt-md-5 pt-lg-7 pb-md-5 pb-lg-7">
     <div class="container">
       <div class="col-lg-8 col-md-10 mx-auto">
@@ -18,85 +17,103 @@
           <div class="card-header bg-gradient-info p-5 position-relative">
             <h3 class="text-white mb-0">Contact Us</h3>
             <p class="text-white opacity-8 mb-4">Last modified: Feb 01 2021</p>
+            <p class="mb-0">
+              {% if msg %}
+                {{ msg }}
+              {% else %}
+                *All fields are mandatory
+              {% endif %}
+            </p>
             <div class="position-absolute w-100 z-index-1 bottom-0 ms-n5">
-              <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 40" preserveAspectRatio="none" shape-rendering="auto" style="height:7vh;min-height:50px;">
+              <svg class="waves"
+                   xmlns="http://www.w3.org/2000/svg"
+                   xmlns:xlink="http://www.w3.org/1999/xlink"
+                   viewBox="0 24 150 40"
+                   preserveAspectRatio="none"
+                   shape-rendering="auto"
+                   style="height:7vh;
+                          min-height:50px">
                 <defs>
-                  <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path>
+                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path>
                 </defs>
                 <g class="moving-waves">
-                  <use xlink:href="#gentle-wave" x="48" y="-1" fill="rgba(255,255,255,0.40"></use>
-                  <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.35)"></use>
-                  <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.25)"></use>
-                  <use xlink:href="#gentle-wave" x="48" y="8" fill="rgba(255,255,255,0.20)"></use>
-                  <use xlink:href="#gentle-wave" x="48" y="13" fill="rgba(255,255,255,0.15)"></use>
-                  <use xlink:href="#gentle-wave" x="48" y="16" fill="rgba(255,255,255,0.95"></use>
+                <use xlink:href="#gentle-wave" x="48" y="-1" fill="rgba(255,255,255,0.40"></use>
+                <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.35)"></use>
+                <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.25)"></use>
+                <use xlink:href="#gentle-wave" x="48" y="8" fill="rgba(255,255,255,0.20)"></use>
+                <use xlink:href="#gentle-wave" x="48" y="13" fill="rgba(255,255,255,0.15)"></use>
+                <use xlink:href="#gentle-wave" x="48" y="16" fill="rgba(255,255,255,0.95"></use>
                 </g>
               </svg>
             </div>
           </div>
           <div class="card-body p-5 pt-0">
-
-        
-         
-                <div class="row align-items-center">
-                  <div class="col-lg-8 mx-auto text-center">
-                    <div class="ms-3 mb-md-5">
-
-                      <p>
-                        For further questions, including partnership opportunities, please email info@quantiota.com
-                        or contact using our contact form.
-                      </p>
-                    </div>
-                  </div>
+            <div class="row align-items-center">
+              <div class="col-lg-8 mx-auto text-center">
+                <div class="ms-3 mb-md-5">
+                  <p>
+                    For further questions, including partnership opportunities, please email info@quantiota.com
+                    or contact using our contact form.
+                  </p>
                 </div>
-                <div class="row">
-                  <div class="col-lg-8 mx-auto">
-                    <div class="card card-plain">
-                      <form id="contact-form" method="post" autocomplete="off">
-                        <div class="card-body">
-                          <div class="row">
-                            <div class="col-md-6">
-                              <label>Full Name</label>
-                              <div class="input-group mb-4">
-                                <input class="form-control" placeholder="Full Name" aria-label="Full Name" type="text">
-                              </div>
-                            </div>
-                            <div class="col-md-6 ps-md-2">
-                              <label>Email</label>
-                              <div class="input-group">
-                                <input type="email" class="form-control" placeholder="hello@example.com">
-                              </div>
-                            </div>
-                          </div>
-                          <div class="form-group mb-4 mt-md-0 mt-4">
-                            <label>What can we help you?</label>
-                            <textarea name="message" class="form-control" id="message" rows="6" placeholder="Describe your problem in at least 250 characters"></textarea>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-12 text-center">
-                              <button type="submit" class="btn bg-gradient-info mt-4">Send Message</button>
-                            </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-8 mx-auto">
+                <div class="card card-plain">
+                  <form role="form"
+                        id="contact-form"
+                        action=""
+                        method="post"
+                        autocomplete="off">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label>Full Name</label>
+                          <div class="input-group mb-4">
+                            <input class="form-control"
+                                   name="full_name"
+                                   placeholder="Full Name"
+                                   aria-label="Full Name"
+                                   type="text">
                           </div>
                         </div>
-                      </form>
+                        <div class="col-md-6 ps-md-2">
+                          <label>Email</label>
+                          <div class="input-group">
+                            <input type="email"
+                                   name="email"
+                                   class="form-control"
+                                   placeholder="hello@example.com">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group mb-4 mt-md-0 mt-4">
+                        <label>What can we help you?</label>
+                        <textarea name="message"
+                                  class="form-control"
+                                  id="message"
+                                  rows="6"
+                                  placeholder="Describe your problem in at least 250 characters"></textarea>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12 text-center">
+                          <button type="submit" class="btn bg-gradient-info mt-4">Send Message</button>
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                  </form>
                 </div>
-              
-
-
-          </div>      </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
-
-  
-
-  {% endblock content %}
-
-  <!-- Specific JS goes HERE --> 
-  {% block javascripts %}
-  
-    <script src="/static/assets/js/soft-design-system.min.js?v=1.0.1" type="text/javascript"></script>
-  
-  {% endblock javascripts %}
+{% endblock content %}
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+  <script src="/static/assets/js/soft-design-system.min.js?v=1.0.1"
+          type="text/javascript"></script>
+{% endblock javascripts %}

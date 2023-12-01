@@ -7,7 +7,7 @@ import os, json
 import base64
 import sqlite3
 import sqlite3 as sql
-
+import flask
 
 
 
@@ -25,6 +25,12 @@ from app      import app
 from app.util import get_products, Product, load_product, load_product_by_slug, load_json_product
 
 import stripe
+
+from app import mail
+from app.config import Config
+
+from flask_mail import Message
+default_sender = Config.MAIL_DEFAULT_SENDER
 
 # Stripe Credentials
 stripe_keys = {
@@ -407,3 +413,87 @@ def is_logged_in():
     if current_user.is_authenticated:
         return True
     return False
+
+################################
+# START - CONTACT US PAGE
+################################
+def send_email(to, subject, message):
+    
+    try:
+
+        msg = Message(
+            subject,
+            body=message,
+            recipients=[to],
+            sender=default_sender
+            )
+        
+        mail.send(msg)
+
+        return True, None
+    
+    except Exception as e:
+
+        print('Error sending email: ' + str( e))
+        return False, str( e )
+
+@app.route('/contact/', methods=['GET', 'POST'])
+@login_required
+def contact():
+
+    msg = None
+
+    if flask.request.method == 'POST':
+
+        contact_name  = request.form.get('full_name')
+        contact_email = request.form.get('email')
+        contact_msg   = request.form.get('message') 
+
+        status, error = send_email(contact_email, 'Mail from: ' + contact_name, contact_msg)
+
+        if status:
+            msg = 'Message sent.'
+        else:
+            msg = 'Error: ' + error 
+
+    return render_template('pages/contact-us.html', msg=msg)
+
+@app.route('/<template>')
+@login_required
+def route_template(template):
+
+    try:
+
+        if not template.endswith('.html'):
+            template += '.html'
+
+        # Detect the current page
+        segment = get_segment(request)
+
+        # Serve the file (if exists) from app/templates/home/FILE.html
+        return render_template("pages/" + template, segment=segment)
+
+    except TemplateNotFound:
+        return render_template('pages/page-404.html'), 404
+
+    except:
+        return render_template('pages/page-500.html'), 500
+
+
+# Helper - Extract current page name from request
+def get_segment(request):
+
+    try:
+
+        segment = request.path.split('/')[-1]
+
+        if segment == '':
+            segment = 'index'
+
+        return segment
+
+    except:
+        return None
+################################
+# END - CONTACT US PAGE
+################################
