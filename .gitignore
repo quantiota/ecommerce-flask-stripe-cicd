@@ -14,5 +14,3 @@ app/db.sqlite3
 
 .env
 .env__
-
-instance/db.sqlite3
