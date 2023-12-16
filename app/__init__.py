@@ -37,3 +37,5 @@ def load_user(user_id):
 # Import routing to render the pages
 from app import views
 
+if __name__ == '__main__':
+    app.run(debug=True)
