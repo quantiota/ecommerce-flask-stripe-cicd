@@ -37,3 +37,5 @@ class Config(object):
 
     # Mail Accounts
     MAIL_DEFAULT_SENDER = os.getenv('MAIL_DEFAULT_SENDER')
+
+    DEBUG = True
