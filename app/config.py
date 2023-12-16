@@ -27,7 +27,7 @@ class Config(object):
 
    # Mail Settings
     MAIL_SERVER = os.getenv('MAIL_SERVER')
-    MAIL_PORT = int(os.getenv('MAIL_PORT', 587))  # Default to 587 if not set
+    MAIL_PORT = int(os.getenv('MAIL_PORT', 465))  # Default to 587 if not set
 
     # Mail Authentication
     MAIL_USERNAME = os.getenv('MAIL_USERNAME')
