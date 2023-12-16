@@ -25,16 +25,15 @@ class Config(object):
     #######################################
     # Flask-Mail configuration for contact form
 
-    # Mail Settings
-    MAIL_SERVER   = os.getenv('MAIL_SERVER')
-    MAIL_PORT     = os.getenv('MAIL_PORT')
+   # Mail Settings
+    MAIL_SERVER = os.getenv('MAIL_SERVER')
+    MAIL_PORT = int(os.getenv('MAIL_PORT', 587))  # Default to 587 if not set
 
     # Mail Authentication
     MAIL_USERNAME = os.getenv('MAIL_USERNAME')
     MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
-    MAIL_USE_TLS  = os.getenv('MAIL_USE_TLS')
-    MAIL_USE_SSL  = os.getenv('MAIL_USE_SSL')
-    
+    MAIL_USE_TLS = os.getenv('MAIL_USE_TLS', 'False') == 'True'
+    MAIL_USE_SSL = os.getenv('MAIL_USE_SSL', 'False') == 'True'
 
     # Mail Accounts
     MAIL_DEFAULT_SENDER = os.getenv('MAIL_DEFAULT_SENDER')
