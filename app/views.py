@@ -48,7 +48,7 @@ app.config['MAIL_USE_SSL'] = os.getenv('MAIL_USE_SSL', 'False') == 'True'
 app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER')
-
+app.config['MAIL_CONTACT_RECIPIENT'] = os.getenv('MAIL_CONTACT_RECIPIENT')
 
 mail = Mail(app)
 
@@ -61,7 +61,7 @@ def contact():
 
         msg = Message("New Contact Form Submission",
                       sender=email,
-                      recipients=["info@quantiota.com"])  # Replace with your email
+                      recipients=[app.config['MAIL_CONTACT_RECIPIENT']])
         msg.body = f"Name: {name}\nEmail: {email}\nMessage: {message}"
 
         try:
