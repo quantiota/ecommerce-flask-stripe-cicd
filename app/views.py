@@ -41,17 +41,19 @@ from flask_mail import Mail, Message
 
 
 # Flask-Mail Configuration
-app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
-app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT', 587))
-app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS', 'False') == 'True'
-app.config['MAIL_USE_SSL'] = os.getenv('MAIL_USE_SSL', 'False') == 'True'
-app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
-app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
-app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER')
+mail_settings = {
+    "MAIL_SERVER": os.getenv('MAIL_SERVER'),
+    "MAIL_PORT": int(os.getenv('MAIL_PORT', 587)),
+    "MAIL_USE_TLS": os.getenv('MAIL_USE_TLS', 'False') == 'True',
+    "MAIL_USE_SSL": os.getenv('MAIL_USE_SSL', 'False') == 'True',
+    "MAIL_USERNAME": os.getenv('MAIL_USERNAME'),
+    "MAIL_PASSWORD": os.getenv('MAIL_PASSWORD'),
+    "MAIL_DEFAULT_SENDER": os.getenv('MAIL_DEFAULT_SENDER')
+}
 
+app.config.update(mail_settings)
 
-
-
+# Initialize Flask-Mail with the app
 mail = Mail(app)
 
 @app.route('/contact', methods=['GET', 'POST'])
