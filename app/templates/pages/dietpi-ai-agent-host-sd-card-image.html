@@ -138,7 +138,7 @@
     
                   <div class="getting-started">
     
-                    <p>To use the AI Agent Host, follow these steps:
+                    <p>To generate certificates, follow these steps:
                     <ol>
                         <li>Write the image file onto a 64GB SD Card .</li>
                         <li>Insert the preloaded micro SD card into your Raspberry Pi and boot.</li>
@@ -151,15 +151,15 @@
                         <p class="command-line">
                           cd Raspberry-Pi-AI-Agent-Host/docker
                       </p>
-                        <li> Start Services from the command line:</li>
+                        <li> Generate certificate for vscode from the command line:</li>
                         <p class="command-line">
                           sudo docker compose -f init.yaml run certbot certonly -d vscode.yourdomain.tld
                         </p>
-                        <li> After Usage Stop Services from the command line:</li>
+                        <li>Generate certificate for questdb from the command line:</li>
                         <p class="command-line">
                           sudo docker compose -f init.yaml run certbot certonly -d questdb.yourdomain.tld
 
-                            <li> After Usage Stop Services from the command line:</li>
+                            <li> Generate certificate for grafana from the command line:</li>
                             <p class="command-line">
                               sudo docker compose -f init.yaml run certbot certonly -d grafana.yourdomain.tld
                             </p>
