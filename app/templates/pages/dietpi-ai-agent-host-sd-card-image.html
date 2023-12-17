@@ -153,11 +153,16 @@
                       </p>
                         <li> Start Services from the command line:</li>
                         <p class="command-line">
-                            sudo docker compose up --build -d
+                          sudo docker compose -f init.yaml run certbot certonly -d vscode.yourdomain.tld
                         </p>
                         <li> After Usage Stop Services from the command line:</li>
                         <p class="command-line">
-                            sudo docker compose -v down
+                          sudo docker compose -f init.yaml run certbot certonly -d questdb.yourdomain.tld
+
+                            <li> After Usage Stop Services from the command line:</li>
+                            <p class="command-line">
+                              sudo docker compose -f init.yaml run certbot certonly -d grafana.yourdomain.tld
+                            </p>
                         </p>
                     </ol>
                     </p>
@@ -168,7 +173,7 @@
                      <!-- Usage-->
             <div class="usage">
     
-                <h4 class="mb-0">Usage</div>
+                <h4 class="mb-0">Setup environment variables</div>
                 <p>Once the services are up and running, you can access the AI Agent Host interfaces:</p>
                 <li>VSCode: Visit localhost:8080 in your web browser. The password is yourpassword</li>
                 <li>QuestDB: Visit localhost:9000 in your web browser. The user/password are the default one: admin:admin
