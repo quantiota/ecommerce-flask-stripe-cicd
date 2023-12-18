@@ -115,6 +115,74 @@
   </section>
 
 
+        <!-- -------- PREREQUISITES------- -->
+
+        <section class="py-sm-0 py-5 position-relative">
+          <div class="container">
+            <div class="row">
+              <div class="col-12 mx-auto">
+                <div class="row py-lg-7 py-5">
+                  <div class="col-lg-3 col-md-5 position-relative my-auto">
+                    <img class="img border-radius-lg  w-100 position-relative z-index-2" src="/static/assets/img/programming.jpg">
+                     
+                  </div>
+                  <div class="col-lg-8 col-md-7 z-index-2 position-relative px-md-2 px-sm-5 mt-sm-0 mt-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                      <h4 class="mb-0">Prerequisites</h4>
+                      <div class="d-block">
+                        <a href="/contact">
+                        <button type="button" class="btn btn-sm btn-outline-info text-nowrap mb-0">Contact Us</button></a>
+                      </div>
+                    </div>
+      
+      
+                    <div class="getting-started">
+      
+                      <p>Write the image file onto a 64GB SD Card and Insert the preloaded micro SD card into your Raspberry Pi and boot
+                        To generate certificates, replace 'yourdomain.tld' with your actual domain and follow these steps:
+                      <ol>
+            
+                          <li>Open an SSH session with the default user/password: pi:raspberrypi </li>
+                          <p class="command-line">
+                              ssh pi@raspberrypi
+                          </p>
+                          <li>Change the directory with the command line </li>
+                          <p class="command-line">
+                            cd Raspberry-Pi-AI-Agent-Host/docker
+                        </p>
+                          <li> Generate certificate for vscode from the command line:</li>
+                          <p class="command-line">
+                            sudo docker compose -f init.yaml run certbot certonly -d vscode.yourdomain.tld
+                          </p>
+                          <li>Generate certificate for questdb from the command line:</li>
+                          <p class="command-line">
+                            sudo docker compose -f init.yaml run certbot certonly -d questdb.yourdomain.tld
+  
+                              <li> Generate certificate for grafana from the command line:</li>
+                              <p class="command-line">
+                                sudo docker compose -f init.yaml run certbot certonly -d grafana.yourdomain.tld
+                              </p>
+  
+                              <li> Define your domain name in the 'nginx.env' file:</li>
+                              <p class="command-line">
+                                sudo nano nginx/nginx.env
+                              </p>
+                          </p>
+                      </ol>
+                      </p>
+          
+                      <!-- Add more points as needed -->
+                  </div>
+      
+      
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
     <!-- -------- GETTING STARTED ------- -->
 
     <section class="py-sm-0 py-5 position-relative">
