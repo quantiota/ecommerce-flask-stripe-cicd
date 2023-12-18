@@ -238,8 +238,8 @@
                 </li>
                 <li>Grafana: Visit localhost:3000 in your web browser. The user/password are the default one: admin:admin
                 </li>
-                <p>Start working with live streaming data from cryptocurrencies and data from a weather station
-                    using a BME680 sensor. </p>
+                <p>Start working with live streaming data from cryptocurrencies, Weather Station and GPS Tracker. 
+              </p>
     
             </div>
 
@@ -274,22 +274,16 @@
   
                 <div class="getting-started">
   
-                  <p>To use the AI Agent Host, follow these steps:
+                  <p>To enable the data stream processor:
                   <ol>
-                   
-      
-                      <li>Open an SSH session with the defaut user: pi and change directory with the command line: </li>
+                      
+                      <li>Open the docker-compose.yaml file, replace 'docker_host_ip_address' with 
+                        your public ip address or your domain name then run the python file.</li>
                       <p class="command-line">
-                          cd Raspberry-Pi-AI-Agent-Host/docker
+                        host="docker_host_ip_address",
                       </p>
-                      <li> Start Services from the command line:</li>
-                      <p class="command-line">
-                          sudo docker compose up --build -d
-                      </p>
-                      <li> After Usage Stop Services from the command line:</li>
-                      <p class="command-line">
-                          sudo docker compose -v down
-                      </p>
+                      <li> Go to Grafana dashboard and open the Coinbase matches ETH BTC panel:</li>
+                
                   </ol>
                   </p>
       
