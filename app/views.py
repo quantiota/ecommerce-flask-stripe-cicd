@@ -120,24 +120,23 @@ def register():
 
 
 
-
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
 
-        user = User(username=username, password=password)
-        login_user(user=user, remember=True)
-        return redirect('/')
-
+        user = User.query.filter_by(username=username).first()
+        if user and check_password_hash(user.password, password):
+            login_user(user, remember=True)
+            return redirect('/')
+        else:
+            # Handle login failure
+            pass
 
     return render_template("pages/page-sign-in.html")
 
-@app.route('/logout/', methods=['GET'])
-def logout():
-    logout_user()
-    return redirect('/')
+
 
 @app.cli.command("create-user")
 def create_user():
@@ -145,10 +144,12 @@ def create_user():
     email = input("Email: ")
     password = input("Password: ")
 
-    user = User(username=username, email=email, password=password)
-    db.create_all()
+    hashed_password = generate_password_hash(password, method='sha256')
+
+    user = User(username=username, email=email, password=hashed_password)
     db.session.add(user)
     db.session.commit()
+    print("User created successfully.")
 
 # AUTH 
 ###############################################
