@@ -79,17 +79,43 @@ def thank_you():
 
 ###############################################
 # AUTH 
-
 @app.route('/register/', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
+        # Capture form data
         username = request.form.get('username')
         email = request.form.get('email')
         password = request.form.get('password')
-# Add validation and processing logic here
 
+        # Basic validation
+        if not username or not email or not password:
+            flash('Please enter all fields', 'error')
+            return render_template("pages/page-sign-up.html")
 
-        # Process the form data for registration
+        # Check if user already exists
+        existing_user = User.query.filter_by(username=username).first()
+        if existing_user:
+            flash('Username already exists', 'error')
+            return render_template("pages/page-sign-up.html")
+
+        # Hash the password
+        hashed_password = generate_password_hash(password, method='sha256')
+
+        # Create new user instance
+        new_user = User(username=username, email=email, password=hashed_password)
+
+        # Add new user to database
+        try:
+            db.session.add(new_user)
+            db.session.commit()
+            flash('Registration successful', 'success')
+            return redirect(url_for('login'))  # Redirect to login page after registration
+        except Exception as e:
+            # Handle database errors
+            db.session.rollback()
+            flash('Error during registration', 'error')
+            return render_template("pages/page-sign-up.html")
+    else:
         return render_template("pages/page-sign-up.html")
 
 
