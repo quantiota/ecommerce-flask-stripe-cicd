@@ -76,49 +76,24 @@ def contact():
 def thank_you():
     return render_template('pages/thank-you.html')
 
+##############################################
+#test mail
+
+@app.route('/test_mail')
+def test_mail():
+    try:
+        msg = Message("Test Email", 
+                      sender="info@quantiota.org",
+                      recipients=["bouarfa.mahi@gmail.com"],
+                      body="This is a test email.")
+        mail.send(msg)
+        return "Email sent successfully!"
+    except Exception as e:
+        return "Failed to send email. Error: {}".format(e)
+
 
 ###############################################
 # AUTH 
-@app.route('/register/', methods=['GET', 'POST'])
-def register():
-    if request.method == 'POST':
-        # Capture form data
-        username = request.form.get('username')
-        email = request.form.get('email')
-        password = request.form.get('password')
-
-        # Basic validation
-        if not username or not email or not password:
-            flash('Please enter all fields', 'error')
-            return render_template("pages/page-sign-up.html")
-
-        # Check if user already exists
-        existing_user = User.query.filter_by(username=username).first()
-        if existing_user:
-            flash('Username already exists', 'error')
-            return render_template("pages/page-sign-up.html")
-
-        # Hash the password
-        hashed_password = generate_password_hash(password, method='sha256')
-
-        # Create new user instance
-        new_user = User(username=username, email=email, password=hashed_password)
-
-        # Add new user to database
-        try:
-            db.session.add(new_user)
-            db.session.commit()
-            flash('Registration successful', 'success')
-            return redirect(url_for('login'))  # Redirect to login page after registration
-        except Exception as e:
-            # Handle database errors
-            db.session.rollback()
-            flash('Error during registration', 'error')
-            return render_template("pages/page-sign-up.html")
-    else:
-        return render_template("pages/page-sign-up.html")
-
-
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
@@ -126,17 +101,17 @@ def login():
         username = request.form.get('username')
         password = request.form.get('password')
 
-        user = User.query.filter_by(username=username).first()
-        if user and check_password_hash(user.password, password):
-            login_user(user, remember=True)
-            return redirect('/')
-        else:
-            # Handle login failure
-            pass
+        user = User(username=username, password=password)
+        login_user(user=user, remember=True)
+        return redirect('/')
+
 
     return render_template("pages/page-sign-in.html")
 
-
+@app.route('/logout/', methods=['GET'])
+def logout():
+    logout_user()
+    return redirect('/')
 
 @app.cli.command("create-user")
 def create_user():
@@ -144,12 +119,10 @@ def create_user():
     email = input("Email: ")
     password = input("Password: ")
 
-    hashed_password = generate_password_hash(password, method='sha256')
-
-    user = User(username=username, email=email, password=hashed_password)
+    user = User(username=username, email=email, password=password)
+    db.create_all()
     db.session.add(user)
     db.session.commit()
-    print("User created successfully.")
 
 # AUTH 
 ###############################################
