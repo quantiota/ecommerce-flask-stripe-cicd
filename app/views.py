@@ -80,7 +80,7 @@ def thank_you():
 ###############################################
 # AUTH 
 
-@app.route('/register', methods=['GET', 'POST'])
+@app.route('/register/', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         # Process the form data for registration
