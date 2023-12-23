@@ -80,14 +80,6 @@ def thank_you():
 ###############################################
 # AUTH 
 
-@app.route('/register/', methods=['GET', 'POST'])
-def register():
-    if request.method == 'POST':
-        # Process the form data for registration
-        return render_template("pages/page-sign-up.html")
-
-
-
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
