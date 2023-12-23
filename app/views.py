@@ -83,6 +83,12 @@ def thank_you():
 @app.route('/register/', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
+        username = request.form.get('username')
+        email = request.form.get('email')
+        password = request.form.get('password')
+# Add validation and processing logic here
+
+
         # Process the form data for registration
         return render_template("pages/page-sign-up.html")
 
