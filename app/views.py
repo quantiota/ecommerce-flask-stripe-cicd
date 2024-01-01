@@ -161,7 +161,7 @@ def create_checkout_session(path):
         checkout_session = stripe.checkout.Session.create(
             success_url=domain_url + "success?session_id={CHECKOUT_SESSION_ID}",
             cancel_url=domain_url + "cancelled",         
-            payment_method_types=["card"],
+            payment_method_types=["card", "paypal"],
             mode="payment",
             line_items=[
                 {
