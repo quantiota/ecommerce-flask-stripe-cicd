@@ -3,6 +3,8 @@
     "name": "Sixfab 4G/LTE Base HAT",
     "currency": "usd",
     "price": "49.0",
+    "tax_behavior": "exclusive",
+    "tax_code": "txcd_37010000",
     "short_description": "",
     "full_description": "The Sixfab 3G/4G & LTE Base HAT grants your Raspberry Pi or 40-pin Pi compatible single-board-computer a super-simple interface bridge between mini PCIe cellular modems. With the modems you insert into Base HAT, your Raspberry Pi based projects will access data networks all around the world. This Base HAT enables high-bandwidth cellular connectivity on your remote devices. From low-power consumption LTE-M to ultra-high-speed LTE-Advanced mini PCIe cards supported by this HAT. Both UART and USB communication with modules are available on the shield.",
     "info": "Expansion Board",
