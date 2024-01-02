@@ -38,7 +38,8 @@ stripe.api_key = stripe_keys["secret_key"]
 # Contact Form & Mail Module
 from flask_mail import Mail, Message
 
-
+#server configuration
+app.config['SERVER_ADDRESS'] = os.getenv('SERVER_ADDRESS')
 
 # Flask-Mail Configuration
 app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
