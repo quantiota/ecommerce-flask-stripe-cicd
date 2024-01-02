@@ -130,7 +130,7 @@ def success():
 def cancelled():
     return render_template("ecommerce/payment-cancelled.html")
 
-@app.route("/create-checkout-session/<path>/")
+@app.route("/create-checkout-session/<path>")
 def create_checkout_session(path):
 
     product = load_product_by_slug( path )
