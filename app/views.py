@@ -175,7 +175,7 @@ def create_checkout_session(path):
                     },
                     "quantity": 1,
                 }
-            ]
+            ],
         )
         return jsonify({"sessionId": checkout_session["id"]})
     except Exception as e:
