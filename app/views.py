@@ -127,11 +127,6 @@ def create_user():
 
 # AUTH 
 ###############################################
-    
-
-domain_url = app.config['SERVER_ADDRESS']
-stripe.api_key = stripe_keys["secret_key"]
-
 
 @app.route("/config")
 def get_publishable_key():
@@ -151,7 +146,8 @@ def create_checkout_session(path):
 
     product = load_product_by_slug( path )
 
- 
+    domain_url = app.config['SERVER_ADDRESS']
+    stripe.api_key = stripe_keys["secret_key"]
 
     try:
         # Create new Checkout Session for the order
@@ -169,11 +165,16 @@ def create_checkout_session(path):
             payment_method_types=["card", "paypal"],
             mode="payment",
             line_items=[
-                {
-                    "name": product.name,
+               {
+                    "price_data": {
+                        "currency": product["currency"],
+                        "product_data": {
+                            "name": product["name"],
+                        },
+                        "unit_amount": int(float(product["price"]) * 100),
+                        "tax_behavior": product["tax_behavior"],
+                    },
                     "quantity": 1,
-                    "currency": 'usd',
-                    "amount": product.price * 100,
                 }
             ]
         )
