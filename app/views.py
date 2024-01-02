@@ -66,22 +66,6 @@ def contact():
 def thank_you():
     return render_template('pages/thank-you.html')
 
-##############################################
-#test mail
-
-@app.route('/test_mail')
-def test_mail():
-    try:
-        msg = Message("Test Email", 
-                      sender="info@quantiota.org",
-                      recipients=["bouarfa.mahi@gmail.com"],
-                      body="This is a test email.")
-        mail.send(msg)
-        return "Email sent successfully!"
-    except Exception as e:
-        return "Failed to send email. Error: {}".format(e)
-
-
 ###############################################
 # AUTH 
 
