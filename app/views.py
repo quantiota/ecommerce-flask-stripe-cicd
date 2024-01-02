@@ -165,16 +165,11 @@ def create_checkout_session(path):
             payment_method_types=["card", "paypal"],
             mode="payment",
             line_items=[
-               {
-                    "price_data": {
-                        "currency": product["currency"],
-                        "product_data": {
-                            "name": product["name"],
-                        },
-                        "unit_amount": int(float(product["price"]) * 100),
-                        "tax_behavior": product["tax_behavior"],
-                    },
+                {
+                    "name": product.name,
                     "quantity": 1,
+                    "currency": 'usd',
+                    "amount": product.price * 100,
                 }
             ]
         )
