@@ -165,17 +165,12 @@ def create_checkout_session(path):
             mode="payment",
             line_items=[
                 {
-                    "price_data": {
-                        "currency": product["currency"],
-                        "product_data": {
-                            "name": product["name"],
-                        },
-                        "unit_amount": int(float(product["price"]) * 100),
-                        "tax_behavior": product["tax_behavior"],
-                    },
+                    "name": product.name,
                     "quantity": 1,
+                    "currency": 'usd',
+                    "amount": product.price * 100,
                 }
-            ],
+            ]
         )
         return jsonify({"sessionId": checkout_session["id"]})
     except Exception as e:
