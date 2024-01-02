@@ -127,6 +127,11 @@ def create_user():
 
 # AUTH 
 ###############################################
+    
+
+domain_url = app.config['SERVER_ADDRESS']
+stripe.api_key = stripe_keys["secret_key"]
+
 
 @app.route("/config")
 def get_publishable_key():
@@ -146,8 +151,7 @@ def create_checkout_session(path):
 
     product = load_product_by_slug( path )
 
-    domain_url = app.config['SERVER_ADDRESS']
-    stripe.api_key = stripe_keys["secret_key"]
+ 
 
     try:
         # Create new Checkout Session for the order
