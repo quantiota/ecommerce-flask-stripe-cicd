@@ -149,14 +149,7 @@ def create_checkout_session(path):
         return jsonify({"sessionId": checkout_session["id"]})
     except Exception as e:
         return jsonify(error=str(e)), 403
-    
-
-    ##############
-
-@app.route("/test/")
-def display_server_address():
-    server_address = app.config['SERVER_ADDRESS']
-    return f'Server Address: {server_address}'
+        
     
     
     # Route for the home page
