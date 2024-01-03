@@ -117,11 +117,6 @@ def cancelled():
 @app.route("/create-checkout-session/<path>/")
 def create_checkout_session(path):
 
- # Ensure the request is made over HTTPS
-    if request.scheme != 'https':
-        https_url = f"https://quantiota.com/create-checkout-session/{path}/"
-        return redirect(https_url)
-
     product = load_product_by_slug( path )
 
     domain_url = app.config['SERVER_ADDRESS']
