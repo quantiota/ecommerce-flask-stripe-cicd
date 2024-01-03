@@ -118,8 +118,10 @@ def cancelled():
 def create_checkout_session(path):
 
     product = load_product_by_slug( path )
+    protocol = 'https' if request.is_secure() else 'http'
 
-    domain_url = app.config['SERVER_ADDRESS']
+    domain_url = f"{protocol}://{request.host}"
+
     stripe.api_key = stripe_keys["secret_key"]
 
     try:
