@@ -137,6 +137,7 @@ def create_checkout_session(path):
             cancel_url=domain_url + "cancelled",         
             payment_method_types=["card", "paypal"],
             mode="payment",
+            automatic_tax={"enabled": True},
             line_items=[
                 {
                     "name": product.name,
