@@ -3,6 +3,8 @@
     "name": "Quectel EG25-G Mini PCIe",
     "currency": "usd",
     "price": "79.0",
+    "tax_behavior": "exclusive",
+    "tax_code": "txcd_37010000",
     "short_description": "",
     "full_description": "The Quectel EG25-G Mini PCIe is an LTE Category 4 module designed in the standard PCI Express® Mini Card form factor. Tailored for M2M and IoT applications, it boasts data rates of up to 150Mbps for download and 50Mbps for upload. Notably, it ensures connectivity in areas lacking 4G or 3G as it's also compatible with EDGE and GSM/GPRS networks. The module incorporates Qualcomm® IZat™ Gen8C Lite location technology, supporting multiple satellite systems like GPS, GLONASS, BeiDou/Compass, Galileo, and QZSS, ensuring swift and precise positioning. Furthermore, its extensive set of Internet protocols, industry-standard interfaces, and diverse functionalities make it suitable for various M2M applications, including industrial routers, PDAs, rugged tablets, and digital signage.",
     "info": "IoT/M2M- Optimized",
