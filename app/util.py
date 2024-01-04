@@ -11,8 +11,6 @@ class Product:
     name     = ''
     price    = 0
     currency = ''
-    tax_behavior = ''
-    tax_code = ''
     info     = ''
     short_description = ''
     full_description = ''
@@ -85,8 +83,6 @@ def load_product( aJSONPath ):
     product.info  = data["info"]
     product.currency = data["currency"]
     product.price = int( float(data["price"]) )
-    product.tax_behavior = data["tax_behavior"]
-    product.tax_code = data["tax_code"]
     product.short_description = data["short_description"]
     product.full_description  = data["full_description"]
     product.slug  = get_slug( aJSONPath )

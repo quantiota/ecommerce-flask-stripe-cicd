@@ -3,8 +3,6 @@
     "name": "Waveshare BME680",
     "currency": "usd",
     "price": "20.0",
-    "tax_behavior": "exclusive",
-    "tax_code": "txcd_37010000",
     "short_description": "",
     "full_description": "The BME680 is the first gas sensor that integrates high-linearity and high-accuracy gas, pressure, humidity and temperature sensors. It is especially developed for mobile applications and wearables where size and low power consumption are critical requirements. The BME680 guarantees - depending on the specific operating mode - optimized consumption, long-term stability and high EMC robustness. In order to measure air quality for personal wellbeing the gas sensor within the BME680 can detect a broad range of gases such as volatile organic compounds (VOC).",
     "info": "Environmental Sensor",
