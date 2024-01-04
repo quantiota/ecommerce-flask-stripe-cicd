@@ -341,6 +341,7 @@ def update_product(path):
             'price': request.form.get('price'),
             'tax_behavior': request.form.get('tax_behavior'),
             'tax_code': request.form.get('tax_code'),
+            'short_description': request.form.get('short_description'),
             'full_description': request.form.get('full_description'),
             'info': request.form.get('info'),
             'img_main': main_img,
