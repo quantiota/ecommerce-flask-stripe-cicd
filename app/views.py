@@ -222,6 +222,8 @@ def load_product_json():
             dict['id'] = product['id']
             dict['name'] = product['name']
             dict['price'] = product["default_price"]["unit_amount"]/100
+            dict['tax_behavior'] = product['tax_behavior']
+            dict['tax_code'] = product['tax_code']
             dict['currency'] = product["default_price"]["currency"]
             dict['full_description'] = product["description"]
             dict['info'] = product["description"][0:30]
@@ -337,6 +339,8 @@ def update_product(path):
             'name': json.loads(product)['name'],
             'currency': json.loads(product)['currency'],
             'price': request.form.get('price'),
+            'tax_behavior': request.form.get('tax_behavior'),
+            'tax_code': request.form.get('tax_code'),
             'full_description': request.form.get('full_description'),
             'info': request.form.get('info'),
             'img_main': main_img,
