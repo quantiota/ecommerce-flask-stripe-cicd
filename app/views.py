@@ -123,33 +123,29 @@ def create_checkout_session(path):
     stripe.api_key = stripe_keys["secret_key"]
 
     try:
-        # Define tax rates based on the product's tax behavior and code
-        tax_rates = []
-        if product.tax_behavior == "exclusive":
-            # Calculate the tax amount based on the price (assuming 10% tax rate)
-            tax_amount = round(float(product.price) * 0.20, 2)  # Adjust tax rate as needed
-            tax_rates.append({
-                "price": 1000,  # Tax rate amount in cents (10% tax rate)
-                "inclusive": False,
-            })
-
         # Create new Checkout Session for the order
+        # Other optional params include:
+        # [billing_address_collection] - to display billing address details on the page
+        # [customer] - if you have an existing Stripe Customer ID
+        # [payment_intent_data] - lets capture the payment later
+        # [customer_email] - lets you prefill the email input in the form
+        # For full details see https:#stripe.com/docs/api/checkout/sessions/create
+
+        # ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
         checkout_session = stripe.checkout.Session.create(
             success_url=domain_url + "success?session_id={CHECKOUT_SESSION_ID}",
-            cancel_url=domain_url + "cancelled",
+            cancel_url=domain_url + "cancelled",         
             payment_method_types=["card", "paypal"],
             mode="payment",
             line_items=[
                 {
                     "name": product.name,
                     "quantity": 1,
-                    "currency": product.currency,
-                    "amount": int(float(product.price) * 100),  # Convert price to cents
-                    "tax_rates": tax_rates,  # Include tax rates
+                    "currency": 'usd',
+                    "amount": product.price * 100,
                 }
             ]
         )
-
         return jsonify({"sessionId": checkout_session["id"]})
     except Exception as e:
         return jsonify(error=str(e)), 403
