@@ -114,27 +114,50 @@ def success():
 def cancelled():
     return render_template("ecommerce/payment-cancelled.html")
 
+
+import stripe
+
+# Initialize Stripe API with your secret key
+stripe.api_key = 'YOUR_STRIPE_SECRET_KEY'
+
+def calculate_tax_rate(tax_code):
+    try:
+        # Retrieve tax rates from Stripe based on the tax code
+        tax_rates = stripe.TaxRate.list(limit=100, active=True, tax_code=tax_code)
+
+        if len(tax_rates) > 0:
+            # Use the first active tax rate found (you can refine this logic as needed)
+            return tax_rates[0].percentage / 100  # Convert percentage to decimal
+        else:
+            # If no tax rates are found, return a default tax rate (e.g., 0%)
+            return 0.0
+    except stripe.error.StripeError as e:
+        # Handle any Stripe API errors here
+        print(f"Stripe API Error: {e}")
+        return 0.0  # Return a default tax rate in case of an error
+
+
+
+
 @app.route("/create-checkout-session/<path>/")
 def create_checkout_session(path):
-
-    product = load_product_by_slug( path )
-
+    product = load_product_by_slug(path)
     domain_url = app.config['SERVER_ADDRESS']
     stripe.api_key = stripe_keys["secret_key"]
 
-    try:
-        # Create new Checkout Session for the order
-        # Other optional params include:
-        # [billing_address_collection] - to display billing address details on the page
-        # [customer] - if you have an existing Stripe Customer ID
-        # [payment_intent_data] - lets capture the payment later
-        # [customer_email] - lets you prefill the email input in the form
-        # For full details see https:#stripe.com/docs/api/checkout/sessions/create
+    
 
-        # ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
+    try:
+        # Calculate tax rate based on the 'tax_code' attribute
+        tax_rate = calculate_tax_rate(product.tax_code)
+
+        # Calculate the total amount including tax
+        total_amount = int(product.price * (1 + tax_rate)) * 100  # Convert to cents
+
+        # Create a new Checkout Session for the order
         checkout_session = stripe.checkout.Session.create(
             success_url=domain_url + "success?session_id={CHECKOUT_SESSION_ID}",
-            cancel_url=domain_url + "cancelled",         
+            cancel_url=domain_url + "cancelled",
             payment_method_types=["card", "paypal"],
             mode="payment",
             line_items=[
@@ -142,14 +165,14 @@ def create_checkout_session(path):
                     "name": product.name,
                     "quantity": 1,
                     "currency": 'usd',
-                    "amount": product.price * 100,
+                    "amount": total_amount,  # Use the calculated total amount
                 }
             ]
         )
         return jsonify({"sessionId": checkout_session["id"]})
     except Exception as e:
         return jsonify(error=str(e)), 403
-        
+
     
     
     # Route for the home page
