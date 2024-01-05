@@ -115,10 +115,6 @@ def cancelled():
     return render_template("ecommerce/payment-cancelled.html")
 
 
-import stripe
-
-# Initialize Stripe API with your secret key
-stripe.api_key = 'YOUR_STRIPE_SECRET_KEY'
 
 def calculate_tax_rate(tax_code):
     try:
