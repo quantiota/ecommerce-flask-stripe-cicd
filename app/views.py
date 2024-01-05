@@ -141,7 +141,9 @@ def create_checkout_session(path):
     domain_url = app.config['SERVER_ADDRESS']
     stripe.api_key = stripe_keys["secret_key"]
 
-    
+    print("Tax Code:", product.tax_code)
+    print("Tax Rate:", tax_rate)
+    print("Total Amount:", total_amount)
 
     try:
         # Calculate tax rate based on the 'tax_code' attribute
@@ -168,6 +170,8 @@ def create_checkout_session(path):
         return jsonify({"sessionId": checkout_session["id"]})
     except Exception as e:
         return jsonify(error=str(e)), 403
+
+
 
     
     
