@@ -145,7 +145,8 @@ def create_checkout_session(path):
                     "amount": product.price * 100,
                 }
             ],  
-            billing_address_collection="required",         
+            billing_address_collection="required",
+            automatic_tax="enabled",         
             tax_id_collection={"enabled": True}
         )
         return jsonify({"sessionId": checkout_session["id"]})
