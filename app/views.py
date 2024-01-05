@@ -114,31 +114,27 @@ def success():
 def cancelled():
     return render_template("ecommerce/payment-cancelled.html")
 
-
-def calculate_tax_rate(tax_code):
-    # For testing purposes, set a default tax rate (e.g., 10%)
-    return 0.10  # 10%
-
-
-
 @app.route("/create-checkout-session/<path>/")
 def create_checkout_session(path):
-    product = load_product_by_slug(path)
+
+    product = load_product_by_slug( path )
+
     domain_url = app.config['SERVER_ADDRESS']
     stripe.api_key = stripe_keys["secret_key"]
 
-
     try:
-        # Calculate tax rate based on the 'tax_code' attribute
-        tax_rate = calculate_tax_rate(product.tax_code)
+        # Create new Checkout Session for the order
+        # Other optional params include:
+        # [billing_address_collection] - to display billing address details on the page
+        # [customer] - if you have an existing Stripe Customer ID
+        # [payment_intent_data] - lets capture the payment later
+        # [customer_email] - lets you prefill the email input in the form
+        # For full details see https:#stripe.com/docs/api/checkout/sessions/create
 
-        # Calculate the total amount including tax
-        total_amount = int(product.price * (1 + tax_rate)) * 100  # Convert to cents
-
-        # Create a new Checkout Session for the order
+        # ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
         checkout_session = stripe.checkout.Session.create(
             success_url=domain_url + "success?session_id={CHECKOUT_SESSION_ID}",
-            cancel_url=domain_url + "cancelled",
+            cancel_url=domain_url + "cancelled",         
             payment_method_types=["card", "paypal"],
             mode="payment",
             line_items=[
@@ -146,16 +142,14 @@ def create_checkout_session(path):
                     "name": product.name,
                     "quantity": 1,
                     "currency": 'usd',
-                    "amount": total_amount,  # Use the calculated total amount
+                    "amount": product.price * 100,
                 }
             ]
         )
         return jsonify({"sessionId": checkout_session["id"]})
     except Exception as e:
         return jsonify(error=str(e)), 403
-
-
-
+        
     
     
     # Route for the home page
