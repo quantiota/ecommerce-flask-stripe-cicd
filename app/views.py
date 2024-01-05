@@ -115,23 +115,9 @@ def cancelled():
     return render_template("ecommerce/payment-cancelled.html")
 
 
-
 def calculate_tax_rate(tax_code):
-    try:
-        # Retrieve tax rates from Stripe based on the tax code
-        tax_rates = stripe.TaxRate.list(limit=100, active=True, tax_code=tax_code)
-
-        if len(tax_rates) > 0:
-            # Use the first active tax rate found (you can refine this logic as needed)
-            return tax_rates[0].percentage / 100  # Convert percentage to decimal
-        else:
-            # If no tax rates are found, return a default tax rate (e.g., 0%)
-            return 0.0
-    except stripe.error.StripeError as e:
-        # Handle any Stripe API errors here
-        print(f"Stripe API Error: {e}")
-        return 0.0  # Return a default tax rate in case of an error
-
+    # For testing purposes, set a default tax rate (e.g., 10%)
+    return 0.10  # 10%
 
 
 
@@ -141,9 +127,6 @@ def create_checkout_session(path):
     domain_url = app.config['SERVER_ADDRESS']
     stripe.api_key = stripe_keys["secret_key"]
 
-    print("Tax Code:", product.tax_code)
-    print("Tax Rate:", tax_rate)
-    print("Total Amount:", total_amount)
 
     try:
         # Calculate tax rate based on the 'tax_code' attribute
