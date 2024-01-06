@@ -132,9 +132,10 @@ def calculate_tax_rate(tax_code):
     except stripe.error.StripeError as e:
         # Handle any Stripe API errors here
         print(f"Stripe API Error: {e}")
+        print("tax_rates")
         return 0.0  # Return a default tax rate in case of an error
        
-
+    
 
 
 @app.route("/create-checkout-session/<path>/")
