@@ -124,12 +124,6 @@ def create_checkout_session(path):
 
 
 
-    # Retrieve tax rates for the given tax code
-    tax_rates = stripe.TaxRate.list(limit=100, active=True, tax_code='txcd_37010000')
-
-    # Print the tax rates
-    print(tax_rates)
-
     try:
         # Create new Checkout Session for the order
         # Other optional params include:
