@@ -123,8 +123,6 @@ def create_checkout_session(path):
     domain_url = app.config['SERVER_ADDRESS']
     stripe.api_key = stripe_keys["secret_key"]
 
-
-
     try:
         # Create new Checkout Session for the order
         # Other optional params include:
@@ -150,6 +148,7 @@ def create_checkout_session(path):
             ],  
             billing_address_collection="required",        
             tax_id_collection={"enabled": True},
+            automatic_tax={"enabled": True},
         )
         return jsonify({"sessionId": checkout_session["id"]})
     except Exception as e:
