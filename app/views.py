@@ -115,29 +115,6 @@ def cancelled():
     return render_template("ecommerce/payment-cancelled.html")
 
 
-# Initialize Stripe API with your secret key
-stripe.api_key = 'YOUR_STRIPE_SECRET_KEY'
-
-def calculate_tax_rate(tax_code):
-    try:
-        # Retrieve tax rates from Stripe based on the tax code
-        tax_rates = stripe.TaxRate.list(limit=100, active=True, tax_code="txcd_37010000")
-
-        if len(tax_rates) > 0:
-            # Use the first active tax rate found (you can refine this logic as needed)
-            return tax_rates[0].percentage / 100  # Convert percentage to decimal
-        else:
-            # If no tax rates are found, return a default tax rate (e.g., 0%)
-            return 0.0
-    except stripe.error.StripeError as e:
-        # Handle any Stripe API errors here
-        print(f"Stripe API Error: {e}")
-        print("tax_rates:", tax_rates)  # Print the tax_rates list
-        return 0.0  # Return a default tax rate in case of an error
-       
-    
-
-
 @app.route("/create-checkout-session/<path>/")
 def create_checkout_session(path):
 
@@ -177,7 +154,8 @@ def create_checkout_session(path):
         return jsonify({"sessionId": checkout_session["id"]})
     except Exception as e:
         return jsonify(error=str(e)), 403
-        
+    
+
     
     
     # Route for the home page
