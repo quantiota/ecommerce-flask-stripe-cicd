@@ -143,7 +143,7 @@ def create_checkout_session(path):
                     "quantity": 1,
                     "currency": 'usd',
                     "amount": product.price * 100,
-                    "tax_rates": ["0.20"], 
+                    "tax_rates": '0.20', 
                 }
             ],  
             billing_address_collection="required",        
