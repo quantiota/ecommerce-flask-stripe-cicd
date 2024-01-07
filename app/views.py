@@ -144,7 +144,7 @@ def create_checkout_session(path):
                     "quantity": 1,
                     "currency": product.currency,
                     "tax_code": product.tax_code,
-                    "tax_behavior": product.tax_behavior,
+
                     "amount": product.price * 100,
                 }
             ],  
