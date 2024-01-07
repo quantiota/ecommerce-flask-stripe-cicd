@@ -1,7 +1,7 @@
 {
     "id": "prod_Mdq6AVJsC9YBCN",
     "name": "Raspberry Pi DevBox",
-    "currency": "usd",
+    "currency": "eur",
     "price": "350.0",
     "tax_behavior": "exclusive",
     "tax_code": "txcd_37010000",
