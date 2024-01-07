@@ -143,6 +143,8 @@ def create_checkout_session(path):
                     "name": product.name,
                     "quantity": 1,
                     "currency": 'usd',
+                    "tax_code": 'txcd_37010000',
+                    "tax_behaviour": 'exclusive',
                     "amount": product.price * 100,
                 }
             ],  
@@ -150,6 +152,7 @@ def create_checkout_session(path):
             tax_id_collection={"enabled": True},   
               
         )
+
         return jsonify({"sessionId": checkout_session["id"]})
     except Exception as e:
         return jsonify(error=str(e)), 403
