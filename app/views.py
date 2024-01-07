@@ -143,8 +143,6 @@ def create_checkout_session(path):
                     "name": product.name,
                     "quantity": 1,
                     "currency": product.currency,
-                   
-
                     "amount": product.price * 100,
                 }
             ],  
