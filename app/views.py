@@ -136,16 +136,19 @@ def create_checkout_session(path):
         checkout_session = stripe.checkout.Session.create(
             success_url=domain_url + "success?session_id={CHECKOUT_SESSION_ID}",
             cancel_url=domain_url + "cancelled",         
-            payment_method_types=["card", "paypal"],
-            mode="payment",
-            line_items=[
-                {
-                    "name": product.name,
-                    "quantity": 1,
-                    "currency": product.currency,
-                    "amount": product.price * 100,
-                }
-            ],  
+        mode="payment",
+    payment_method_types=["card"],
+    line_items=[
+        {
+        "quantity": 2,
+        "price_data": {
+        "currency": "usd",
+        "unit_amount": 1,
+        "tax_behavior": "exclusive",
+        "product": "prod_Mdq6AVJsC9YBCN"",
+      },
+    }
+  ], 
             billing_address_collection="required",        
             tax_id_collection={"enabled": True},  
             
