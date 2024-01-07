@@ -143,11 +143,14 @@ def create_checkout_session(path):
                     "name": product.name,
                     "quantity": 1,
                     "currency": product.currency,
+                    "tax_behavior": product.tax_behavior, 
+                    "tax_code": product.tax_code, 
                     "amount": product.price * 100,
                 }
             ],  
             billing_address_collection="required",        
-            tax_id_collection={"enabled": True},   
+            tax_id_collection={"enabled": True},  
+            
               
         )
 
