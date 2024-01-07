@@ -145,7 +145,7 @@ def create_checkout_session(path):
         "currency": "usd",
         "unit_amount": 1,
         "tax_behavior": "exclusive",
-        "product": "prod_Mdq6AVJsC9YBCN"",
+        "product": "prod_Mdq6AVJsC9YBCN",
       },
     }
   ], 
