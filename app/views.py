@@ -140,9 +140,10 @@ def create_checkout_session(path):
             mode="payment",
             line_items=[
                 {
-                    "name": product.name,
+                    "name": product.tax_behavior,
                     "quantity": 1,
                     "currency": product.currency,
+
                     "amount": product.price * 100,
                 }
             ],  
