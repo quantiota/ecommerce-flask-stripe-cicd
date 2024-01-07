@@ -143,8 +143,7 @@ def create_checkout_session(path):
                     "name": product.name,
                     "quantity": 1,
                     "currency": 'usd',
-                    "tax_code": 'txcd_37010000',
-                    "tax_behaviour": 'exclusive',
+
                     "amount": product.price * 100,
                 }
             ],  
