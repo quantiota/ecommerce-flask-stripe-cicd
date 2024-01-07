@@ -140,10 +140,11 @@ def create_checkout_session(path):
             mode="payment",
             line_items=[
                 {
-                    "name": product.tax_behavior,
+                    "name": product.name,
                     "quantity": 1,
                     "currency": product.currency,
-
+                    "tax_code": product.tax_code,
+                    "tax_behavior": product.tax_behavior,
                     "amount": product.price * 100,
                 }
             ],  
@@ -345,9 +346,9 @@ def update_product(path):
             'id': json.loads(product)['id'],
             'name': json.loads(product)['name'],
             'currency': json.loads(product)['currency'],
+            'tax_code': json.loads(product)['tax_code'],
+            'tax_behavior': json.loads(product)['tax_behavior'],
             'price': request.form.get('price'),
-            'tax_behavior': request.form.get('tax_behavior'),
-            'tax_code': request.form.get('tax_code'),
             'short_description': request.form.get('short_description'),
             'full_description': request.form.get('full_description'),
             'info': request.form.get('info'),
